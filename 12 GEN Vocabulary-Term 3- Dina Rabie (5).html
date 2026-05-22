@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>12 GEN Vocabulary-Term 1- Dina Rabie</title>
+<meta name="robots" content="noindex, nofollow">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.counter.dev/script.js" data-id="dd7b7ac1-64b0-4aa0-aa58-347ec3c7a99e" data-utcoffset="4"></script>
+<style>
+  :root {
+    --l1: #f97316;
+    --l1-light: #fff7ed;
+    --l1-mid: #fed7aa;
+    --l2: #8b5cf6;
+    --l2-light: #f5f3ff;
+    --l2-mid: #ddd6fe;
+    --bg: #f8fafc;
+    --card: #ffffff;
+    --text: #1e293b;
+    --muted: #64748b;
+    --green: #16a34a;
+    --green-bg: #dcfce7;
+    --red: #dc2626;
+    --red-bg: #fee2e2;
+    --shadow: 0 4px 20px rgba(0,0,0,0.08);
+    --radius: 16px;
+    --radius-sm: 10px;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+  /* HEADER */
+  header {
+    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+    color: white;
+    padding: 28px 24px 20px;
+    text-align: center;
+  }
+  header h1 { font-size: clamp(1.4rem, 4vw, 2rem); font-weight: 900; letter-spacing: -0.5px; }
+  header p { font-size: 0.9rem; color: #94a3b8; margin-top: 4px; }
+  .grade-badge {
+    display: inline-block;
+    background: var(--l1);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 800;
+    padding: 3px 12px;
+    border-radius: 20px;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  /* LESSON SELECTOR */
+  .lesson-nav {
+    display: flex;
+    gap: 14px;
+    padding: 20px 20px 0;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+  .lesson-btn {
+    flex: 1;
+    border: none;
+    border-radius: var(--radius);
+    padding: 18px 16px;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+  .lesson-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+  .lesson-btn.l1 { background: var(--l1-light); border: 2.5px solid var(--l1-mid); }
+  .lesson-btn.l1.active { background: var(--l1); border-color: var(--l1); color: white; box-shadow: 0 8px 24px rgba(249,115,22,0.35); transform: translateY(-2px); }
+  .lesson-btn.l2 { background: var(--l2-light); border: 2.5px solid var(--l2-mid); }
+  .lesson-btn.l2.active { background: var(--l2); border-color: var(--l2); color: white; box-shadow: 0 8px 24px rgba(139,92,246,0.35); transform: translateY(-2px); }
+  .lesson-btn .lesson-num { font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; opacity: 0.7; }
+  .lesson-btn .lesson-title { font-size: clamp(0.85rem, 2.5vw, 1.05rem); font-weight: 900; margin-top: 4px; line-height: 1.3; }
+  .lesson-btn .lesson-sub { font-size: 0.75rem; margin-top: 4px; opacity: 0.75; }
+  /* MAIN CONTENT */
+  .main { max-width: 860px; margin: 0 auto; padding: 20px; }
+  .instruction {
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+  /* WORD GRID */
+  .word-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .word-chip {
+    padding: 9px 18px;
+    border-radius: 30px;
+    border: 2px solid transparent;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .word-chip .sound-icon { font-size: 0.8rem; }
+  .l1-theme .word-chip { background: var(--l1-light); border-color: var(--l1-mid); color: var(--l1); }
+  .l1-theme .word-chip:hover, .l1-theme .word-chip.active {
+    background: var(--l1); color: white; border-color: var(--l1);
+    box-shadow: 0 4px 14px rgba(249,115,22,0.3); transform: translateY(-1px);
+  }
+  .l2-theme .word-chip { background: var(--l2-light); border-color: var(--l2-mid); color: var(--l2); }
+  .l2-theme .word-chip:hover, .l2-theme .word-chip.active {
+    background: var(--l2); color: white; border-color: var(--l2);
+    box-shadow: 0 4px 14px rgba(139,92,246,0.3); transform: translateY(-1px);
+  }
+  /* WORD CARD */
+  .word-card {
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 24px;
+    margin-bottom: 24px;
+    animation: slideIn 0.3s ease;
+    border-left: 5px solid var(--accent, var(--l1));
+  }
+  @keyframes slideIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+  .word-card .wc-word { font-size: clamp(1.5rem, 5vw, 2rem); font-weight: 900; color: var(--accent, var(--l1)); }
+  .word-card .wc-pos { font-size: 0.8rem; color: var(--muted); font-style: italic; margin-left: 8px; }
+  .wc-row { display: flex; gap: 16px; margin-top: 14px; flex-wrap: wrap; }
+  .wc-block { flex: 1; min-width: 200px; }
+  .wc-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 800; color: var(--muted); margin-bottom: 4px; }
+  .wc-meaning { font-size: 1rem; font-weight: 600; line-height: 1.5; }
+  .wc-arabic { font-family: 'Tajawal', sans-serif; font-size: 1.05rem; font-weight: 700; direction: rtl; text-align: right; line-height: 1.6; }
+  .wc-divider { border: none; border-top: 1px solid #e2e8f0; margin: 14px 0; }
+  .wc-example { font-size: 0.95rem; line-height: 1.6; color: #334155; font-style: italic; }
+  .wc-example span { font-style: normal; font-weight: 800; }
+  .wc-ex-ar { font-family: 'Tajawal', sans-serif; font-size: 0.97rem; direction: rtl; text-align: right; color: #475569; margin-top: 8px; line-height: 1.8; }
+  .play-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    margin-top: 14px; padding: 8px 18px;
+    border: none; border-radius: 30px;
+    font-family: 'Nunito', sans-serif; font-size: 0.85rem; font-weight: 700;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .l1-theme .play-btn { background: var(--l1); color: white; }
+  .l2-theme .play-btn { background: var(--l2); color: white; }
+  .play-btn:hover { opacity: 0.85; transform: scale(1.03); }
+  /* MCQ SECTION */
+  .mcq-header {
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 10px;
+    margin-bottom: 16px;
+  }
+  .mcq-title { font-size: 1.1rem; font-weight: 900; }
+  .score-box {
+    padding: 6px 16px; border-radius: 30px;
+    font-size: 0.85rem; font-weight: 800;
+    background: #f1f5f9; color: var(--text);
+  }
+  .reset-btn {
+    padding: 7px 16px; border-radius: 30px; border: none;
+    font-family: 'Nunito', sans-serif; font-size: 0.82rem; font-weight: 700;
+    cursor: pointer; background: #e2e8f0; color: #475569; transition: all 0.2s;
+  }
+  .reset-btn:hover { background: #cbd5e1; }
+  .mcq-card {
+    background: var(--card); border-radius: var(--radius-sm);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    padding: 18px 20px; margin-bottom: 14px;
+  }
+  .mcq-q { font-size: 0.95rem; font-weight: 700; line-height: 1.5; margin-bottom: 12px; }
+  .mcq-q em { font-style: normal; border-bottom: 2px dashed #94a3b8; padding-bottom: 1px; }
+  .mcq-options { display: flex; flex-direction: column; gap: 8px; }
+  .mcq-opt {
+    padding: 9px 16px; border-radius: var(--radius-sm);
+    border: 2px solid #e2e8f0; background: #f8fafc;
+    font-family: 'Nunito', sans-serif; font-size: 0.88rem; font-weight: 600;
+    cursor: pointer; text-align: left; transition: all 0.2s;
+  }
+  .mcq-opt:not(.answered):hover { border-color: #94a3b8; background: #f1f5f9; }
+  .mcq-opt.correct { background: var(--green-bg); border-color: var(--green); color: var(--green); }
+  .mcq-opt.wrong { background: var(--red-bg); border-color: var(--red); color: var(--red); }
+  .mcq-opt.revealed { background: var(--green-bg); border-color: var(--green); color: var(--green); opacity: 0.7; }
+  .mcq-opt.answered { cursor: default; }
+  .mcq-feedback { font-size: 0.8rem; font-weight: 700; margin-top: 8px; }
+  .mcq-feedback.ok { color: var(--green); }
+  .mcq-feedback.no { color: var(--red); }
+  /* SECTION DIVIDER */
+  .section-sep {
+    border: none; border-top: 2px dashed #e2e8f0;
+    margin: 24px 0;
+  }
+  @keyframes popIn { from { opacity:0; transform:translateX(-50%) scale(0.7); } to { opacity:1; transform:translateX(-50%) scale(1); } }
+  /* COPY PROTECTION */
+  body { -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
+  /* VISITOR COUNTER */
+  .visitor-bar {
+    background: #0f172a;
+    text-align: center;
+    padding: 7px 16px;
+    font-size: 0.8rem;
+    color: #94a3b8;
+    letter-spacing: 0.5px;
+  }
+  .visitor-bar span { color: #f97316; font-weight: 800; }
+  /* PROTECTED OVERLAY (shown when devtools detected) */
+  #shield {
+    display: none;
+    position: fixed; inset: 0; z-index: 9999;
+    background: #0f172a;
+    color: white;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 1.2rem;
+    font-family: 'Nunito', sans-serif;
+    text-align: center;
+    gap: 12px;
+  }
+  #shield p { color: #94a3b8; font-size: 0.9rem; }
+  /* RESPONSIVE */
+  @media (max-width: 540px) {
+    .lesson-nav { flex-direction: column; }
+    .wc-row { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<div id="shield">🔒 Access Restricted<p>This content is protected.</p></div>
+<div class="visitor-bar">👁️ Visitors tracked by <span>Counter.dev</span> · <a href="https://counter.dev" target="_blank" style="color:#f97316;text-decoration:none;font-weight:800;">View Stats →</a></div>
+<header>
+  <div class="grade-badge">Grade 12 General · English</div>
+  <h1>🌍 Term 3 Vocabulary 2025/2026 — 12 General</h1>
+  <p>Listen · Learn · Practice</p>
+  <p style="margin-top:6px;font-size:0.78rem;color:#cbd5e1;">✏️ Created by <strong style="color:#f97316;">Dina Rabie</strong></p>
+</header>
+
+<div class="lesson-nav" id="lessonNav"></div>
+<div class="main" id="mainContent"></div>
+
+<script>
+// ─────────────────────────────────────────────
+// DATA
+// ─────────────────────────────────────────────
+const lessons = [
+  {
+    id: 1,
+    title: "A Universal Language?",
+    sub: "It's not always what you say that matters, Research and present",
+    color: "#f97316",
+    theme: "l1-theme",
+    accent: "var(--l1)",
+    words: [
+      {
+        word: "range",
+        pos: "noun / verb",
+        en: "a variety of different things of the same general type; to vary between limits",
+        ar: "نطاق / مجموعة متنوعة؛ يتراوح بين حدود",
+        ex: "The teacher offered a wide <span>range</span> of activities to help students practise communication skills.",
+        exAr: "قدّمت المعلمة مجموعة واسعة من الأنشطة لمساعدة الطلاب على تطوير مهارات التواصل."
+      },
+      {
+        word: "consist of",
+        pos: "phrasal verb",
+        en: "to be made up of particular parts or things",
+        ar: "يتكوّن من / يشتمل على",
+        ex: "A good presentation <span>consists of</span> a clear introduction, strong evidence, and a confident conclusion.",
+        exAr: "يتكوّن العرض الجيد من مقدمة واضحة وأدلة قوية وخاتمة واثقة."
+      },
+      {
+        word: "media",
+        pos: "noun (plural)",
+        en: "television, radio, newspapers, and the internet, considered as a group",
+        ar: "وسائل الإعلام",
+        ex: "The <span>media</span> plays a major role in shaping how teenagers think about world events.",
+        exAr: "تؤدي وسائل الإعلام دوراً محورياً في تشكيل طريقة تفكير المراهقين تجاه الأحداث العالمية."
+      },
+      {
+        word: "unacceptable",
+        pos: "adjective",
+        en: "not good enough, or not suitable; not able to be allowed or approved of",
+        ar: "غير مقبول / لا يُحتمل",
+        ex: "Using aggressive gestures during a debate is considered completely <span>unacceptable</span> behaviour.",
+        exAr: "يُعدّ استخدام الإيماءات العدوانية أثناء النقاش سلوكاً غير مقبول إطلاقاً."
+      },
+      {
+        word: "approval",
+        pos: "noun",
+        en: "the feeling that someone or something is good or suitable; official permission",
+        ar: "موافقة / قبول / تأييد",
+        ex: "The student waited for the teacher's <span>approval</span> before presenting her research to the class.",
+        exAr: "انتظرت الطالبة موافقة المعلمة قبل تقديم بحثها أمام الفصل."
+      },
+      {
+        word: "indicate",
+        pos: "verb",
+        en: "to show, point to, or make something clear",
+        ar: "يُشير إلى / يدل على / يوضح",
+        ex: "Studies <span>indicate</span> that eye contact during a conversation builds trust between speakers.",
+        exAr: "تُشير الدراسات إلى أن التواصل البصري أثناء المحادثة يبني الثقة بين المتحدثين."
+      },
+      {
+        word: "disagreement",
+        pos: "noun",
+        en: "a situation where people have different opinions about something",
+        ar: "خلاف / اختلاف في الرأي",
+        ex: "There was a <span>disagreement</span> between the two groups about whether social media does more harm than good.",
+        exAr: "نشأ خلاف بين المجموعتين حول ما إذا كانت وسائل التواصل الاجتماعي تضرّ أكثر مما تنفع."
+      },
+      {
+        word: "gesture",
+        pos: "noun / verb",
+        en: "a movement of the hands, head, or body to express a feeling or idea",
+        ar: "إيماءة / حركة تعبيرية",
+        ex: "A thumbs-up <span>gesture</span> means approval in many countries, but can be offensive in others.",
+        exAr: "تعني إيماءة 'الإبهام لأعلى' الموافقة في كثير من الدول، لكنها قد تكون مسيئة في دول أخرى."
+      },
+      {
+        word: "universally",
+        pos: "adverb",
+        en: "in a way that involves everyone or applies everywhere",
+        ar: "بشكل عالمي / في كل مكان",
+        ex: "Smiling is <span>universally</span> recognised as a sign of friendliness across all cultures.",
+        exAr: "يُعدّ الابتسام بشكل عالمي علامةً على الودّ في جميع الثقافات."
+      },
+      {
+        word: "acceptable",
+        pos: "adjective",
+        en: "good enough or suitable for a particular purpose or situation",
+        ar: "مقبول / ملائم",
+        ex: "Speaking quietly on the phone in a library is generally considered <span>acceptable</span> behaviour.",
+        exAr: "يُعدّ التحدث بهدوء عبر الهاتف في المكتبة سلوكاً مقبولاً في الغالب."
+      },
+      {
+        word: "influence",
+        pos: "noun / verb",
+        en: "the power to affect how someone thinks or behaves; to have an effect on someone",
+        ar: "تأثير؛ يؤثر في / يُسهم في تشكيل",
+        ex: "Social media can strongly <span>influence</span> the way young people communicate with each other.",
+        exAr: "يمكن لوسائل التواصل الاجتماعي أن تؤثر تأثيراً بالغاً في طريقة تواصل الشباب مع بعضهم."
+      }
+    ],
+    mcqs: [
+      { q: "The teacher's new approach covered a wide ___ of communication styles.", opts: ["range","gesture","approval"], ans: 0 },
+      { q: "The final exam ___ two parts: a written test and an oral presentation.", opts: ["indicates","consists of","influences"], ans: 1 },
+      { q: "Teenagers spend hours each day consuming content through social ___.", opts: ["gesture","media","range"], ans: 1 },
+      { q: "Checking your phone while someone is speaking to you is considered ___.", opts: ["acceptable","universal","unacceptable"], ans: 2 },
+      { q: "She nodded in ___, showing she agreed with the suggestion.", opts: ["approval","disagreement","gesture"], ans: 0 },
+      { q: "The results of the survey ___ that most students prefer visual learning.", opts: ["consist of","influence","indicate"], ans: 2 },
+      { q: "The ___ between the two teams was resolved after a long discussion.", opts: ["gesture","disagreement","media"], ans: 1 },
+      { q: "He made a waving ___ to greet his classmates from across the room.", opts: ["range","influence","gesture"], ans: 2 },
+      { q: "Laughter is ___ understood as a positive emotion regardless of culture.", opts: ["universally","unacceptably","considerably"], ans: 0 },
+      { q: "Using polite language in emails is ___ in most professional settings.", opts: ["unacceptable","acceptable","universal"], ans: 1 },
+      { q: "Online advertisements heavily ___ the shopping habits of young consumers.", opts: ["indicate","influence","consist of"], ans: 1 }
+    ]
+  },
+  {
+    id: 2,
+    title: "Each to Their Own",
+    sub: "Planning a tour in NYC / What does Generation Z do for fun?",
+    color: "#8b5cf6",
+    theme: "l2-theme",
+    accent: "var(--l2)",
+    words: [
+      {
+        word: "island",
+        pos: "noun",
+        en: "a piece of land completely surrounded by water",
+        ar: "جزيرة",
+        ex: "Manhattan is an <span>island</span> that sits between the Hudson River and the East River in New York City.",
+        exAr: "مانهاتن جزيرة تقع بين نهر هدسون ونهر إيست في مدينة نيويورك."
+      },
+      {
+        word: "museum",
+        pos: "noun",
+        en: "a building where historical, scientific, or artistic objects are kept and displayed",
+        ar: "متحف",
+        ex: "The natural history <span>museum</span> in New York attracts millions of visitors from around the world every year.",
+        exAr: "يستقطب متحف التاريخ الطبيعي في نيويورك ملايين الزوار من حول العالم كل عام."
+      },
+      {
+        word: "statue",
+        pos: "noun",
+        en: "a figure of a person or animal made from stone, metal, or another material",
+        ar: "تمثال",
+        ex: "The <span>statue</span> of Liberty is one of the most recognised symbols of freedom in the world.",
+        exAr: "يُعدّ تمثال الحرية أحد أشهر رموز الحرية في العالم."
+      },
+      {
+        word: "theater",
+        pos: "noun",
+        en: "a building where plays and other performances are shown to an audience",
+        ar: "مسرح",
+        ex: "Broadway <span>theater</span> productions in New York are famous for their spectacular performances and costumes.",
+        exAr: "تشتهر عروض مسرح برودواي في نيويورك بأدائها الرائع وأزيائها المبهرة."
+      },
+      {
+        word: "Ferris wheel",
+        pos: "noun",
+        en: "a large upright wheel with seats attached to its outside edge, found at fairs and amusement parks",
+        ar: "عجلة الهواء (الدوّارة)",
+        ex: "Riding the giant <span>Ferris wheel</span> at the amusement park gave the tourists a breathtaking view of the city.",
+        exAr: "أعطت ركوب عجلة الهواء العملاقة في الملاهي السياحَ منظراً خلاباً للمدينة."
+      },
+      {
+        word: "heights",
+        pos: "noun (plural)",
+        en: "a high position or level; the fear of being at a great distance above the ground",
+        ar: "الارتفاعات / المرتفعات",
+        ex: "Many tourists feel nervous about visiting the top floor of the skyscraper because of their fear of <span>heights</span>.",
+        exAr: "يشعر كثير من السياح بالقلق عند زيارة الطابق العلوي للناطحة سحاب بسبب خوفهم من الارتفاعات."
+      },
+      {
+        word: "edit",
+        pos: "verb",
+        en: "to prepare written material, photos, or video by cutting, correcting, or rearranging parts",
+        ar: "يُحرّر / يُعدّل / يُعيد صياغة",
+        ex: "Generation Z students regularly <span>edit</span> short video clips and post them on social media platforms.",
+        exAr: "يقوم طلاب الجيل Z بصفة منتظمة بتحرير مقاطع فيديو قصيرة ونشرها على منصات التواصل الاجتماعي."
+      },
+      {
+        word: "associated with",
+        pos: "adjective phrase",
+        en: "connected to or linked with something",
+        ar: "مرتبط بـ / مقترن بـ",
+        ex: "Times Square is <span>associated with</span> the famous New Year's Eve ball drop celebration.",
+        exAr: "يرتبط ميدان التايمز سكوير باحتفال رأس السنة الميلادية الشهير."
+      },
+      {
+        word: "advances",
+        pos: "noun (plural)",
+        en: "developments or improvements, especially in science or technology",
+        ar: "تقدّم / مستجدات / إنجازات",
+        ex: "Technological <span>advances</span> in the last decade have completely changed how teenagers spend their free time.",
+        exAr: "غيّرت التقدمات التكنولوجية في العقد الماضي تغييراً جذرياً طريقة قضاء المراهقين لأوقات فراغهم."
+      },
+      {
+        word: "decade",
+        pos: "noun",
+        en: "a period of ten years",
+        ar: "عقد (من الزمن) / عشر سنوات",
+        ex: "Over the past <span>decade</span>, streaming services have replaced traditional television for many young people.",
+        exAr: "خلال العقد الماضي، حلّت خدمات البث محل التلفزيون التقليدي لكثير من الشباب."
+      },
+      {
+        word: "ambition",
+        pos: "noun",
+        en: "a strong desire to achieve something or to succeed in life",
+        ar: "طموح / هدف كبير",
+        ex: "Her <span>ambition</span> to study medicine in New York drove her to work hard throughout high school.",
+        exAr: "دفعها طموحها في دراسة الطب في نيويورك إلى العمل بجدّ طوال سنوات الثانوية."
+      },
+      {
+        word: "enthusiastic",
+        pos: "adjective",
+        en: "showing a lot of interest, excitement, and energy about something",
+        ar: "متحمّس / مفعم بالحيوية",
+        ex: "The students were very <span>enthusiastic</span> about the school trip to the cultural festival.",
+        exAr: "كان الطلاب متحمسين جداً للرحلة المدرسية إلى المهرجان الثقافي."
+      },
+      {
+        word: "apart from",
+        pos: "preposition",
+        en: "in addition to; except for",
+        ar: "بالإضافة إلى / ما عدا / فضلاً عن",
+        ex: "<span>Apart from</span> visiting museums, the students also explored the street art in Brooklyn.",
+        exAr: "بالإضافة إلى زيارة المتاحف، استكشف الطلاب أيضاً فن الشارع في بروكلين."
+      },
+      {
+        word: "affect",
+        pos: "verb",
+        en: "to have an impact on someone or something; to cause a change in someone or something",
+        ar: "يؤثر في / يُلقي بظلاله على",
+        ex: "Screen time can <span>affect</span> students' concentration and sleep quality if not managed properly.",
+        exAr: "يمكن لوقت الشاشة أن يؤثر في تركيز الطلاب وجودة نومهم إذا لم يُدار بشكل صحيح."
+      },
+      {
+        word: "considerable",
+        pos: "adjective",
+        en: "large in size, amount, or degree; worth attention",
+        ar: "كبير / ملحوظ / معتبر",
+        ex: "A <span>considerable</span> number of teenagers now prefer online gaming to outdoor activities.",
+        exAr: "يُفضّل عدد كبير من المراهقين الآن ألعاب الفيديو الإلكترونية على الأنشطة الخارجية."
+      },
+      {
+        word: "occupy",
+        pos: "verb",
+        en: "to fill time or space; to take up someone's attention",
+        ar: "يشغل / يملأ / يستأثر بـ",
+        ex: "Social media platforms <span>occupy</span> a large part of a teenager's daily routine and attention span.",
+        exAr: "تشغل منصات التواصل الاجتماعي جزءاً كبيراً من الروتين اليومي للمراهق وتستأثر باهتمامه."
+      }
+    ],
+    mcqs: [
+      { q: "Manhattan is actually a/an ___ surrounded by the Hudson and East rivers.", opts: ["island","museum","theater"], ans: 0 },
+      { q: "The art ___ on Fifth Avenue displays rare paintings from five centuries.", opts: ["statue","museum","Ferris wheel"], ans: 1 },
+      { q: "The ___ of Liberty welcomes all visitors arriving by ferry to New York.", opts: ["statue","island","heights"], ans: 0 },
+      { q: "She booked tickets to a Broadway ___ as part of her New York itinerary.", opts: ["Ferris wheel","theater","museum"], ans: 1 },
+      { q: "The children screamed with excitement as the ___ carried them to the top.", opts: ["Ferris wheel","statue","island"], ans: 0 },
+      { q: "He refused to climb the observation deck because of his fear of ___.", opts: ["advances","heights","decades"], ans: 1 },
+      { q: "She used an app to ___ her travel photos before posting them online.", opts: ["edit","affect","occupy"], ans: 0 },
+      { q: "New York City is ___ creativity, diversity, and non-stop entertainment.", opts: ["apart from","associated with","enthusiastic about"], ans: 1 },
+      { q: "Recent technological ___ have made it possible to explore cities virtually.", opts: ["ambitions","advances","decades"], ans: 1 },
+      { q: "In the past ___, smartphones have become essential tools for young people.", opts: ["decade","height","theater"], ans: 0 },
+      { q: "Her ___ is to become a well-known documentary filmmaker by the age of 25.", opts: ["ambition","advance","gesture"], ans: 0 },
+      { q: "The whole class was ___ about the international exchange programme.", opts: ["enthusiastic","considerable","associated"], ans: 0 },
+      { q: "___ attending lectures, students are expected to complete research projects.", opts: ["Apart from","Affect","Occupy"], ans: 0 },
+      { q: "Too much screen time can negatively ___ your ability to focus in class.", opts: ["occupy","edit","affect"], ans: 2 },
+      { q: "There has been a ___ rise in the number of young people learning to code.", opts: ["considerable","enthusiastic","universal"], ans: 0 },
+      { q: "Hobbies like gaming and music ___ much of a teenager's free time.", opts: ["indicate","occupy","consist"], ans: 1 }
+    ]
+  }
+];
+
+// ─────────────────────────────────────────────
+// STATE
+// ─────────────────────────────────────────────
+let activeLessonId = 1;
+let activeWordIdx = null;
+let quizState = {}; // { lessonId: { qIdx: { chosen, correct } } }
+
+function getLesson() { return lessons.find(l => l.id === activeLessonId); }
+
+// ─────────────────────────────────────────────
+// SOUNDS (Web Audio API)
+// ─────────────────────────────────────────────
+function playCorrectSound() {
+  try {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const now = ctx.currentTime;
+    [523.25, 659.25, 783.99].forEach((freq, i) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain); gain.connect(ctx.destination);
+      osc.type = 'sine';
+      osc.frequency.value = freq;
+      gain.gain.setValueAtTime(0.35, now + i * 0.12);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.12 + 0.25);
+      osc.start(now + i * 0.12);
+      osc.stop(now + i * 0.12 + 0.25);
+    });
+  } catch(e) {}
+}
+
+function playWrongSound() {
+  try {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const now = ctx.currentTime;
+    [220, 196].forEach((freq, i) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain); gain.connect(ctx.destination);
+      osc.type = 'sawtooth';
+      osc.frequency.value = freq;
+      gain.gain.setValueAtTime(0.3, now + i * 0.18);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.18 + 0.22);
+      osc.start(now + i * 0.18);
+      osc.stop(now + i * 0.18 + 0.22);
+    });
+  } catch(e) {}
+}
+
+
+function speak(text) {
+  if (!window.speechSynthesis) return;
+  window.speechSynthesis.cancel();
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.lang = 'en-US';
+  utter.rate = 0.85;
+  window.speechSynthesis.speak(utter);
+}
+
+// ─────────────────────────────────────────────
+// SCORE
+// ─────────────────────────────────────────────
+function getScore(lessonId) {
+  const q = quizState[lessonId] || {};
+  const correct = Object.values(q).filter(v => v.correct).length;
+  const answered = Object.values(q).length;
+  return { correct, answered, total: lessons.find(l=>l.id===lessonId).mcqs.length };
+}
+
+// ─────────────────────────────────────────────
+// RENDER
+// ─────────────────────────────────────────────
+function renderLessonNav() {
+  const nav = document.getElementById('lessonNav');
+  nav.innerHTML = lessons.map(l => `
+    <button class="lesson-btn ${l.id===1?'l1':'l2'} ${activeLessonId===l.id?'active':''}"
+      onclick="selectLesson(${l.id})">
+      <div class="lesson-num">Lesson ${l.id}</div>
+      <div class="lesson-title">${l.title}</div>
+      <div class="lesson-sub">${l.sub}</div>
+    </button>
+  `).join('');
+}
+
+function renderWordCard() {
+  const lesson = getLesson();
+  if (activeWordIdx === null) return '';
+  const w = lesson.words[activeWordIdx];
+  return `
+    <div class="word-card" style="border-left-color:${lesson.color}">
+      <div>
+        <span class="wc-word" style="color:${lesson.color}">${w.word}</span>
+        <span class="wc-pos">${w.pos}</span>
+      </div>
+      <div class="wc-row">
+        <div class="wc-block">
+          <div class="wc-label">English Meaning</div>
+          <div class="wc-meaning">${w.en}</div>
+        </div>
+        <div class="wc-block">
+          <div class="wc-label" style="text-align:right">المعنى بالعربية</div>
+          <div class="wc-arabic">${w.ar}</div>
+        </div>
+      </div>
+      <hr class="wc-divider">
+      <div class="wc-label">Example Sentence</div>
+      <div class="wc-example">${w.ex}</div>
+      <div class="wc-ex-ar">${w.exAr}</div>
+      <button class="play-btn" onclick="speak('${w.word.replace(/'/g,"\\'")}')">🔊 Listen Again</button>
+    </div>
+  `;
+}
+
+function renderMCQs() {
+  const lesson = getLesson();
+  const sc = getScore(lesson.id);
+  const stateQ = quizState[lesson.id] || {};
+  const mcqsHTML = lesson.mcqs.map((q, qi) => {
+    const answered = stateQ[qi];
+    const opts = q.opts.map((o, oi) => {
+      let cls = 'mcq-opt';
+      if (answered) {
+        cls += ' answered';
+        if (oi === q.ans) cls += ' correct';
+        else if (oi === answered.chosen) cls += ' wrong';
+      }
+      return `<button class="${cls}" onclick="answerMCQ(${qi},${oi})">${o}</button>`;
+    }).join('');
+    const feedback = answered
+      ? (answered.correct
+          ? `<div class="mcq-feedback ok">✅ Correct!</div>`
+          : `<div class="mcq-feedback no">❌ The correct answer is: <strong>${q.opts[q.ans]}</strong></div>`)
+      : '';
+    return `
+      <div class="mcq-card">
+        <div class="mcq-q">${qi+1}. ${q.q.replace('___','<em>___</em>')}</div>
+        <div class="mcq-options">${opts}</div>
+        ${feedback}
+      </div>
+    `;
+  }).join('');
+
+  return `
+    <hr class="section-sep">
+    <div class="mcq-header">
+      <div class="mcq-title">✏️ Practice: Choose the best word.</div>
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+        <div class="score-box">Score: ${sc.correct} / ${sc.answered} answered</div>
+        <button class="reset-btn" onclick="resetQuiz(${lesson.id})">🔄 Reset Quiz</button>
+      </div>
+    </div>
+    ${mcqsHTML}
+  `;
+}
+
+function renderMain() {
+  const lesson = getLesson();
+  const chipsHTML = lesson.words.map((w, i) => `
+    <button class="word-chip ${activeWordIdx===i?'active':''}"
+      onclick="selectWord(${i})">
+      <span class="sound-icon">🔊</span> ${w.word}
+    </button>
+  `).join('');
+
+  const main = document.getElementById('mainContent');
+  main.innerHTML = `
+    <div class="${lesson.theme}">
+      <p class="instruction">👆 Click a word to listen and learn its meaning.</p>
+      <div class="word-grid">${chipsHTML}</div>
+      ${renderWordCard()}
+      ${renderMCQs()}
+    </div>
+  `;
+}
+
+// ─────────────────────────────────────────────
+// ACTIONS
+// ─────────────────────────────────────────────
+function selectLesson(id) {
+  activeLessonId = id;
+  activeWordIdx = null;
+  renderLessonNav();
+  renderMain();
+}
+
+function selectWord(idx) {
+  activeWordIdx = idx;
+  const lesson = getLesson();
+  speak(lesson.words[idx].word);
+  renderMain();
+  // scroll word card into view
+  setTimeout(() => {
+    const card = document.querySelector('.word-card');
+    if (card) card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }, 50);
+}
+
+function answerMCQ(qi, oi) {
+  const lesson = getLesson();
+  if (!quizState[lesson.id]) quizState[lesson.id] = {};
+  if (quizState[lesson.id][qi]) return; // already answered
+  const isCorrect = oi === lesson.mcqs[qi].ans;
+  quizState[lesson.id][qi] = { chosen: oi, correct: isCorrect };
+  if (isCorrect) playCorrectSound(); else playWrongSound();
+  renderMain();
+  // Check if all answered → show summary feedback
+  const total = lesson.mcqs.length;
+  const answered = Object.keys(quizState[lesson.id]).length;
+  if (answered === total) {
+    setTimeout(() => showFinalFeedback(lesson.id), 350);
+  }
+}
+
+function showFinalFeedback(lessonId) {
+  const sc = getScore(lessonId);
+  const pct = Math.round((sc.correct / sc.total) * 100);
+  let emoji, msg, color;
+  if (pct === 100) { emoji = '🏆'; msg = 'Perfect score! Outstanding work!'; color = '#16a34a'; }
+  else if (pct >= 80) { emoji = '🌟'; msg = 'Excellent! Keep it up!'; color = '#0284c7'; }
+  else if (pct >= 60) { emoji = '👍'; msg = 'Good effort! Review the missed words.'; color = '#d97706'; }
+  else { emoji = '📚'; msg = 'Keep practising — you\'ll get there!'; color = '#dc2626'; }
+
+  const existing = document.getElementById('finalFeedback');
+  if (existing) existing.remove();
+  const div = document.createElement('div');
+  div.id = 'finalFeedback';
+  div.style.cssText = `
+    position:fixed; bottom:24px; left:50%; transform:translateX(-50%);
+    background:#fff; border:3px solid ${color}; border-radius:16px;
+    padding:18px 28px; box-shadow:0 8px 32px rgba(0,0,0,0.18);
+    text-align:center; z-index:1000; min-width:280px; max-width:90vw;
+    animation: popIn 0.4s cubic-bezier(0.34,1.56,0.64,1);
+  `;
+  div.innerHTML = `
+    <div style="font-size:2rem">${emoji}</div>
+    <div style="font-size:1.1rem;font-weight:900;color:${color};margin:6px 0">${sc.correct} / ${sc.total} Correct (${pct}%)</div>
+    <div style="font-size:0.9rem;color:#475569;font-weight:600">${msg}</div>
+    <button onclick="this.parentElement.remove()" style="margin-top:12px;padding:6px 20px;border:none;border-radius:30px;background:${color};color:white;font-family:Nunito,sans-serif;font-weight:700;cursor:pointer;font-size:0.85rem">Close</button>
+  `;
+  document.body.appendChild(div);
+}
+
+function resetQuiz(lessonId) {
+  quizState[lessonId] = {};
+  const fb = document.getElementById('finalFeedback');
+  if (fb) fb.remove();
+  renderMain();
+}
+
+// ─────────────────────────────────────────────
+// INIT
+// ─────────────────────────────────────────────
+renderLessonNav();
+renderMain();
+
+// ─────────────────────────────────────────────
+// COPY PROTECTION
+// ─────────────────────────────────────────────
+// Disable right-click
+document.addEventListener('contextmenu', e => e.preventDefault());
+
+// Disable common keyboard shortcuts
+document.addEventListener('keydown', e => {
+  const blocked = (
+    (e.ctrlKey || e.metaKey) && ['c','u','s','a','p'].includes(e.key.toLowerCase())
+  ) || e.key === 'F12' || (e.ctrlKey && e.shiftKey && ['i','j','c'].includes(e.key.toLowerCase()));
+  if (blocked) { e.preventDefault(); e.stopPropagation(); return false; }
+});
+
+// Disable drag
+document.addEventListener('dragstart', e => e.preventDefault());
+
+// DevTools size-change detection (basic deterrent)
+(function devToolsDetect() {
+  const threshold = 160;
+  function check() {
+    if (window.outerWidth - window.innerWidth > threshold ||
+        window.outerHeight - window.innerHeight > threshold) {
+      document.getElementById('shield').style.display = 'flex';
+    } else {
+      document.getElementById('shield').style.display = 'none';
+    }
+  }
+  window.addEventListener('resize', check);
+  setInterval(check, 1000);
+})();
+
+// ─────────────────────────────────────────────
+// VISITOR COUNTER  (uses api.countapi.xyz)
+// IMPORTANT: Replace YOUR_NAMESPACE and YOUR_KEY below
+// with values you create at: https://countapi.xyz
+// Example namespace: dina-vocab  key: g12-english
+// ─────────────────────────────────────────────
+// Visitor tracking handled by Counter.dev (in <head>)
+</script>
+</body>
+</html>
